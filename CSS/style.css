@@ -1,0 +1,215 @@
+body,
+html {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    height: 100%;
+}
+
+/*************************** HEADER ***************************/
+header {
+    top: 0px;
+    background-color: #CE0033;
+    width: 100%;
+    position: relative;
+}
+
+header img {
+    width: 60%;
+}
+
+header i,
+header a {
+    color: black;
+    font-size: 60px;
+}
+
+header i:hover,
+header a:hover {
+    color: white;
+}
+
+.TitreLarge {
+    display: none;
+}
+
+.LogoLarge {
+    display: none;
+}
+
+.navbar {
+    display: none;
+}
+
+.navbar a {
+    color: black;
+    margin-left: 10px;
+}
+
+/**************MENU*****************/
+
+.dropdown-menu button:hover {
+    background-color: #e70023;
+}
+
+.testmenu.show {
+    width: 200%;
+    margin-top: 5px;
+}
+
+/*********************STATS**************************/
+#stats {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid black;
+    background-color: #dbdbdb;
+}
+
+#stats p {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+canvas {
+    width=25%;
+    height=10%;
+}
+
+/**************** Div qui contient la liste des membres ****************/
+#content {
+    max-height: 300px;
+    overflow-y: scroll;
+    border: 1px solid black;
+}
+
+#content input {
+    margin: 5px;
+}
+
+.Membre {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.imgProfil {
+    height: 100px;
+    width: 70px;
+    align-self: center;
+}
+
+.infoText p {
+    font-size: 10px;
+}
+
+/**************** Div qui contient la "lightbox" qui apparait au click ***************/
+.popup {
+    display: none;
+    max-height: auto;
+    border: 1px solid black;
+    background-color: darkgray;
+}
+
+/************************************ FOOTER ****************************************/
+
+footer {
+    background-color: #CE0033;
+    width: 100%;
+    position: relative;
+    bottom: 0px;
+}
+
+footer a {
+    padding-left: 10px;
+    color: white;
+    font-size: 60px;
+}
+
+footer a:hover {
+    color: black;
+}
+
+
+#buttontop {
+    position: fixed;
+    width: 60px;
+    bottom: 5px;
+    right: 25px;
+}
+
+.tothetop i {
+    color: rgb(102, 102, 102, 0.8);
+    font-size: 60px;
+}
+
+.tothetop i:hover {
+    color: #a3445c;
+}
+
+
+
+/**************** Media Queries ***************/
+
+@media screen and (min-width: 768px) {
+    #content {
+        max-height: 1200px;
+        overflow-y: scroll;
+        background-color: #bfbfbf;
+    }
+
+    header img {
+        width: 40%;
+    }
+
+    #stats p {
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    canvas {
+        width=25%;
+        height=5%;
+    }
+}
+
+@media screen and (min-width: 1199px) {
+    header img {
+        width: 30%;
+    }
+
+    #content {
+        max-height: 1500px;
+        overflow-y: scroll;
+        background-color: #bfbfbf;
+    }
+
+    #stats p {
+        text-align: center;
+        font-size: 2.3em;
+        font-weight: bold;
+    }
+
+    .recherche {
+        display: none;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .TitreLarge {
+        display: block;
+        color: white;
+    }
+
+    .LogoLarge {
+        display: block;
+    }
+
+    .navbar {
+        display: block;
+    }
+}

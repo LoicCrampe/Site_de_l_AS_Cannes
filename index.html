@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet de Julia et Pierre fait par Thomas et Loïc C</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="database.json"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</head>
+
+<body>
+    <header id="top" class="container-fluid">
+        <div class="row">
+            <div class="dropdown col-sm-4 m-sm-0 text-center pt-5 menu">
+                <button class="btn btn-body dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="dropdown-menu testmenu" style="width:200%; height:240%;" aria-labelledby="dropdownMenu2">
+                    <button class="dropdown-item" style="font-size: 1.8em;" type="button"><a href="#stats"><i class="fas fa-chart-pie"></i> Statistiques</a></button>
+                    <button class="dropdown-item" style="font-size: 1.8em;" type="button"><a href="#content"><i class="far fa-user"></i> Liste des Membres</a></button>
+                    <button class="dropdown-item" style="font-size: 1.8em;" type="button"><a href="https://www.ascannesvolley.com" target="_blank"><i class="fab fa-d-and-d"></i> Site Officiel</a></button>
+                    <button class="dropdown-item" style="font-size: 1.8em;" type="button"><a href="https://www.ascannesvolley.com/calendrier-resultats/" target="_blank"><i class="far fa-calendar-alt"></i> Calendrier & Résultat</a></button>
+                </div>
+            </div>
+            <div class="col-sm-4 text-center">
+                <img src="images/ASCannes.png" alt="Dragons de Cannes">
+            </div>
+            <div class="col-lg-4 text-center TitreLarge">
+                <h1>-Les Dragons-</h1>
+            </div>
+            <div class="col-lg-4 text-center LogoLarge">
+                <img src="images/ASCannes.png" alt="Dragons de Cannes">
+            </div>
+            <div class="col-sm-4 m-sm-0 text-center pt-4 recherche">
+                <a href="#content"><i class="fas fa-search"></i></a>
+            </div>
+        </div>
+    </header>
+    <div class="navbar">
+        <a href="#stats">Statistiques</a>
+        <a href="#content">Liste des Membres</a>
+        <a href="https://www.ascannesvolley.com" target="_blank">Site Officiel</a>
+        <a href="https://www.ascannesvolley.com/calendrier-resultats/" target="_blank">Calendrier & Résultat</a>
+    </div>
+    <div class="row col-12">
+        <div class="row col-sm-10 justify-content-sm-center offset-1 col-md-4 order-md-2 ml-5" id="stats">
+            <div class="col-sm-6 col-md-12">
+                <p>Statistiques de parité Hommes/Femmes</p>
+                <canvas id="pie-chart"></canvas>
+            </div>
+            <div class="col-sm-6 col-md-12">
+                <p>Stastistiques des différentes tranches d'âges</p>
+                <canvas id="doughnut-chart"></canvas>
+            </div>
+        </div>
+        <!-- Partie de la liste des membres -->
+
+        <div class="offset-sm-1 col-sm-10 offset-md-0 col-md-6 order-md-1 ml-5" id="content">
+            <input class="col-sm-12" type="text" v-model="search" placeholder="Chercher un nom">
+            <div class="Membre" id="Listing">
+                <div class="col-sm-4 col-md-6 col-lg-4 p-lg-0" v-for="adherent in filtreNom" v-on:click="memberSelection(adherent)">
+                    <div class="text-center card" id="info">
+                        <img src="images/Profil.png" class=" imgProfil card-img-top mt-2" alt="">
+                        <div class="infoText card-body">
+                            <p class="card-text">Nom:<br> {{adherent.name}}</p>
+                            <p class="card-text d-sm-none d-md-block">Age:<br> {{adherent.age}} ans</p>
+                            <p class="card-text d-sm-none d-md-block">Email:<br> {{adherent.email}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lightbox au clique sur les nom des personnes -->
+
+        <div class="popup offset-sm-1 col-sm-10 offset-md-0 col-md-6 order-md-1 ml-5" id="Membres">
+            <button id="Back">Back</button>
+            <div class="col-sm-12 row">
+                <img src="images/Profil.png" class="imgProfil offset-sm-1" alt="">
+                <div class="offset-sm-1">
+                    <span id="resultat1"></span>
+                    <span id="resultat2"></span>
+                </div>
+            </div>
+            <span id="resultat3"></span>
+        </div>
+    </div>
+    <footer>
+        <div class="link">
+            <a id="insta" href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a id="fb" href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-square"></i></a>
+            <a id="youtube" href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube-square"></i></a>
+            <a id="twitter" href="https://twitter.com/" target="_blank"><i class="fab fa-twitter-square"></i></a>
+        </div>
+        <div id="buttontop">
+            <a href="#top" class="tothetop"><i class="fas fa-arrow-alt-circle-up"></i></a>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="JS/script.js"></script>
+</body>
+
+</html>
